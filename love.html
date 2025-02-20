@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>给特别的人 ❤️</title>
+    <style>
+        body {
+            font-family: 'Microsoft Yahei', sans-serif;
+            background: #ff9f9f;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+            z-index: 1;
+        }
+
+        h1 {
+            color: #ff4081;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .heart {
+            color: #ff4081;
+            font-size: 60px;
+            animation: heartbeat 1.2s infinite;
+        }
+
+        .message {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin: 20px 0;
+            max-width: 500px;
+        }
+
+        .hearts-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .heart-bg {
+            position: absolute;
+            color: rgba(255, 64, 129, 0.3);
+            animation: float 6s infinite linear;
+        }
+
+        button {
+            background: #ff4081;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: transform 0.3s;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            15% { transform: scale(1.3); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.15); }
+            60% { transform: scale(1); }
+        }
+
+        @keyframes float {
+            from { transform: translateY(110%) rotate(0deg); }
+            to { transform: translateY(-10%) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts-bg" id="heartsContainer"></div>
+    
+    <div class="container">
+        <div class="heart">❤️</div>
+        <h1 id="title">亲爱的<span id="toName">XXX</span></h1>
+        <div class="message" id="message">
+            <p>从第一次遇见你，我的世界就变得不同了。</p>
+            <p>你的笑容像阳光般温暖，你的眼睛里有星辰大海。</p>
+            <p>愿意给我一个机会，让我陪你走过未来的每一天吗？</p>
+        </div>
+        <div class="heart">❤️</div>
+        <h2 id="fromName">—— 默默喜欢你的我</h2>
+        <button onclick="showConfetti()">点击接受我的心意</button>
+    </div>
+
+    <script>
+        // 自动生成背景爱心
+        function createHearts() {
+            const container = document.getElementById('heartsContainer');
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart-bg';
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.fontSize = Math.random() * 30 + 20 + 'px';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                container.appendChild(heart);
+            }
+        }
+
+        function showConfetti() {
+            alert("❤️ 谢谢你给我这个机会！我会用行动证明我的真心！ ❤️");
+            // 这里可以添加更多庆祝动画
+        }
+
+        // 从URL参数获取名字
+        const urlParams = new URLSearchParams(window.location.search);
+        const toName = urlParams.get('to') || '亲爱的';
+        const fromName = urlParams.get('from') || '默默喜欢你的我';
+
+        // 更新页面内容
+        document.getElementById('toName').textContent = toName;
+        document.getElementById('fromName').textContent = `—— ${fromName}`;
+
+        // 初始化
+        window.onload = createHearts;
+    </script>
+</body>
+</html>
